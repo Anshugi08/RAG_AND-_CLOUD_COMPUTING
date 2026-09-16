@@ -1,0 +1,762 @@
+===========================================================
+RAG (RETRIEVAL AUGMENTED GENERATION)
+COMPLETE STUDY NOTES
+===========================================================
+AUTHOR:
+Original educational notes for AI Engineers,
+Java Developers, and GenAI Developers.
+===========================================================
+CHAPTER 1 : INTRODUCTION TO GENERATIVE AI
+===========================================================
+What is AI?
+AI (Artificial Intelligence) refers to systems that
+perform tasks that normally require human intelligence.
+Examples:
+- ChatGPT
+- Gemini
+- Claude
+- GitHub Copilot
+Types of AI:
+1. Narrow AI
+   - Performs specific tasks
+2. General AI
+   - Human-level intelligence
+3. Super AI
+   - Beyond human intelligence
+-----------------------------------------------------------
+Machine Learning
+Machine Learning allows systems to learn from data.
+Examples:
+- Spam Detection
+- Recommendation Systems
+- Fraud Detection
+-----------------------------------------------------------
+Deep Learning
+Subset of Machine Learning.
+Uses Neural Networks.
+Examples:
+- Image Recognition
+- Speech Recognition
+- LLMs
+===========================================================
+CHAPTER 2 : TRANSFORMERS
+===========================================================
+Before Transformers:
+RNN
+LSTM
+GRU
+Problems:
+- Sequential processing
+- Poor long-term memory
+
+Transformer Solution:
+
+Paper:
+Attention Is All You Need (2017)
+
+Components:
+
+1. Encoder
+2. Decoder
+3. Attention
+Benefits:
+- Parallel Processing
+- Better Accuracy
+- Large Context
+===========================================================
+CHAPTER 3 : LARGE LANGUAGE MODELS
+===========================================================
+
+LLM = Large Language Model
+
+Examples:
+
+- GPT
+- Llama
+- Mistral
+- Claude
+- Gemini
+
+How LLM Works:
+
+Input:
+"What is Java?"
+
+Tokenization:
+
+What
+is
+Java
+?
+
+Prediction Process:
+
+Predict next token repeatedly.
+
+Output:
+"Java is an object-oriented programming language."
+
+===========================================================
+CHAPTER 4 : TOKENIZATION
+===========================================================
+LLMs process tokens not words.
+Example:
+Java Developer
+may become
+[Java]
+[Developer]
+
+or
+
+[Ja]
+[va]
+[Developer]
+
+Token Types:
+1. Word Tokens
+2. Character Tokens
+3. Subword Tokens
+
+Popular Tokenizers:
+- BPE
+- SentencePiece
+- WordPiece
+
+===========================================================
+CHAPTER 5 : LLM LIMITATIONS
+===========================================================
+
+1. Hallucination
+
+Wrong answer generated confidently.
+
+Example:
+
+Question:
+Who invented Java in 1800?
+
+Model creates fake answer.
+
+2. Knowledge Cutoff
+
+Cannot know data beyond training.
+
+3. No Private Data Access
+
+Cannot access company documents.
+
+4. High Memory Cost
+
+===========================================================
+CHAPTER 6 : WHY RAG?
+===========================================================
+
+Problem:
+
+LLM cannot access company data.
+
+Example:
+
+Insurance Policies
+Medical Records
+Company Knowledge Base
+
+Solution:
+
+RAG
+
+Retrieval + Generation
+
+Flow:
+
+Question
+    |
+Retrieve Relevant Data
+    |
+Attach Context
+    |
+Generate Answer
+
+Benefits:
+
+- Accurate
+- Up-to-date
+- Less Hallucination
+- No Fine-tuning Needed
+
+===========================================================
+CHAPTER 7 : RAG ARCHITECTURE
+===========================================================
+
+                User Query
+                     |
+                     V
+             Query Embedding
+                     |
+                     V
+              Vector Database
+                     |
+              Relevant Chunks
+                     |
+                     V
+                   LLM
+                     |
+                     V
+                 Response
+
+Components:
+
+1. Loader
+2. Chunker
+3. Embedding Model
+4. Vector DB
+5. Retriever
+6. LLM
+
+===========================================================
+CHAPTER 8 : DOCUMENT INGESTION
+===========================================================
+
+Supported Sources:
+
+PDF
+DOCX
+TXT
+HTML
+CSV
+Databases
+Confluence
+SharePoint
+
+Steps:
+
+1. Load
+2. Clean
+3. Chunk
+4. Generate Embeddings
+5. Store
+
+===========================================================
+CHAPTER 9 : CHUNKING
+===========================================================
+
+Why Chunk?
+
+LLMs have context limits.
+
+Large document:
+
+500 pages
+
+Need:
+
+Small chunks.
+
+Methods:
+
+1. Fixed Chunking
+2. Recursive Chunking
+3. Semantic Chunking
+4. Sliding Window
+
+Example:
+
+Chunk Size:
+500 tokens
+
+Overlap:
+50 tokens
+
+===========================================================
+CHAPTER 10 : EMBEDDINGS
+===========================================================
+
+Embedding:
+
+Numerical representation of text.
+
+Example:
+
+Java Programming
+
+↓
+
+[0.23, 0.65, 0.99 ...]
+
+Purpose:
+
+Semantic Search
+
+Similar meanings have closer vectors.
+
+===========================================================
+CHAPTER 11 : VECTOR MATHEMATICS
+===========================================================
+
+Vector Similarity:
+
+1. Cosine Similarity
+2. Dot Product
+3. Euclidean Distance
+
+Cosine Similarity:
+
+Range:
+
+-1 to 1
+
+Closer to 1
+
+More similar.
+
+===========================================================
+CHAPTER 12 : VECTOR DATABASES
+===========================================================
+
+Purpose:
+
+Store Embeddings
+
+Examples:
+
+FAISS
+Chroma
+Qdrant
+Pinecone
+Milvus
+Weaviate
+
+Operations:
+
+Insert
+Delete
+Update
+Search
+
+===========================================================
+CHAPTER 13 : FAISS
+===========================================================
+
+Facebook AI Similarity Search
+
+Advantages:
+
+Fast
+Free
+Local Storage
+
+Usage:
+
+Document Search
+Chatbots
+RAG Systems
+
+===========================================================
+CHAPTER 14 : CHROMA DB
+===========================================================
+
+Open Source Vector Database.
+
+Advantages:
+
+Easy integration
+Python friendly
+Local deployment
+
+Use Cases:
+
+Personal AI Assistant
+Knowledge Base Chatbot
+
+===========================================================
+CHAPTER 15 : PINECONE
+===========================================================
+
+Managed Vector Database
+
+Advantages:
+
+Cloud Native
+Highly Scalable
+
+Used in Enterprise RAG
+
+===========================================================
+CHAPTER 16 : RETRIEVAL
+===========================================================
+
+Purpose:
+
+Find relevant chunks.
+
+Techniques:
+
+Keyword Search
+Semantic Search
+Hybrid Search
+
+Parameters:
+
+Top-K = 5
+
+Returns top 5 chunks
+
+===========================================================
+CHAPTER 17 : HYBRID SEARCH
+===========================================================
+
+Combines:
+
+BM25
++
+Vector Search
+
+Benefits:
+
+Better Accuracy
+
+Example:
+
+Keyword Match
++
+Semantic Understanding
+
+===========================================================
+CHAPTER 18 : BM25
+===========================================================
+
+Traditional Search Algorithm
+
+Widely used in:
+
+Elasticsearch
+
+Advantages:
+
+Fast
+Keyword Matching
+
+Limitations:
+
+No semantic understanding
+
+===========================================================
+CHAPTER 19 : RE-RANKING
+===========================================================
+
+Purpose:
+
+Improve retrieval quality.
+
+Process:
+
+Retrieve 100 Documents
+       ↓
+Re-rank
+       ↓
+Return Top 10
+
+Methods:
+
+Cross Encoder
+LLM Re-ranking
+
+===========================================================
+CHAPTER 20 : PROMPT ENGINEERING
+===========================================================
+
+System Prompt
+
+User Prompt
+
+Context Prompt
+
+Rule:
+
+Use only provided context.
+
+If unavailable:
+
+Respond:
+"I don't know."
+
+===========================================================
+CHAPTER 21 : LANGCHAIN
+===========================================================
+
+Framework for LLM Applications.
+
+Components:
+
+PromptTemplate
+Document
+Retriever
+Chain
+Agent
+
+Example Pipeline:
+
+Question
+↓
+Retriever
+↓
+Prompt
+↓
+GPT
+↓
+Answer
+
+===========================================================
+CHAPTER 22 : LLAMAINDEX
+===========================================================
+
+Framework for data-aware AI apps.
+
+Features:
+
+VectorStoreIndex
+SummaryIndex
+QueryEngine
+
+Advantages:
+
+Advanced Retrieval
+
+===========================================================
+CHAPTER 23 : AGENTIC AI
+===========================================================
+
+Traditional AI:
+
+Question → Answer
+
+Agentic AI:
+
+Question
+↓
+Planning
+↓
+Tool Calling
+↓
+Retrieval
+↓
+Execution
+
+===========================================================
+CHAPTER 24 : LANGGRAPH
+===========================================================
+
+Agent workflow orchestration.
+
+Supports:
+
+State Management
+Multi-Agent Systems
+Loops
+Conditional Routing
+
+===========================================================
+CHAPTER 25 : MCP
+===========================================================
+
+Model Context Protocol
+
+Purpose:
+
+Standard communication between:
+
+Models
+Tools
+Resources
+
+Benefits:
+
+Reusable integrations
+
+===========================================================
+CHAPTER 26 : GRAPH RAG
+===========================================================
+
+Uses Knowledge Graphs.
+
+Benefits:
+
+Relationship Awareness
+
+Example:
+
+Patient
+→ Insurance
+→ Hospital
+→ Claim
+
+===========================================================
+CHAPTER 27 : MULTIMODAL RAG
+===========================================================
+
+Supports:
+
+Text
+Audio
+Video
+Images
+
+Use Cases:
+
+Medical Analysis
+Video Search
+Document Intelligence
+
+===========================================================
+CHAPTER 28 : EVALUATION
+===========================================================
+
+Metrics:
+
+1. Precision
+2. Recall
+3. Relevancy
+4. Faithfulness
+5. Latency
+
+===========================================================
+CHAPTER 29 : HALLUCINATION REDUCTION
+===========================================================
+
+Methods:
+
+Grounding
+RAG
+Citations
+Re-Ranking
+Prompt Controls
+
+===========================================================
+CHAPTER 30 : SECURITY
+===========================================================
+
+Threats:
+
+Prompt Injection
+Data Leakage
+Unauthorized Access
+
+Solutions:
+
+Access Control
+Encryption
+Filtering
+
+===========================================================
+CHAPTER 31 : DEPLOYMENT
+===========================================================
+
+Tools:
+
+Docker
+Kubernetes
+AWS
+Azure
+GCP
+
+===========================================================
+CHAPTER 32 : SPRING BOOT + RAG
+===========================================================
+
+Java Flow
+
+Spring Boot API
+↓
+Embedding Service
+↓
+Vector Database
+↓
+OpenAI
+↓
+Response
+
+===========================================================
+CHAPTER 33 : INSURANCE RAG PROJECT
+===========================================================
+
+Features:
+
+Policy Search
+Coverage Details
+Claim Information
+
+Stack:
+
+Spring Boot
+OpenAI
+ChromaDB
+
+===========================================================
+CHAPTER 34 : HEALTHCARE RAG PROJECT
+===========================================================
+
+Features:
+
+Diagnosis Search
+Treatment Information
+Medical Guidelines
+
+===========================================================
+CHAPTER 35 : INTERVIEW QUESTIONS
+===========================================================
+
+1. What is RAG?
+
+Answer:
+Retrieval-Augmented Generation combines
+retrieval with LLM generation.
+
+------------------------------------------------
+
+2. RAG vs Fine-Tuning?
+
+RAG:
+External Knowledge
+
+Fine-Tuning:
+Updates Model Weights
+
+------------------------------------------------
+
+3. What are Embeddings?
+
+Vector representations of text.
+
+------------------------------------------------
+
+4. What is Chunking?
+
+Splitting documents into manageable pieces.
+
+------------------------------------------------
+
+5. What is Vector Database?
+
+Database optimized for similarity search.
+
+------------------------------------------------
+
+6. What is Hybrid Search?
+
+BM25 + Semantic Search.
+
+------------------------------------------------
+
+7. What is Graph RAG?
+
+Knowledge graph based retrieval.
+
+------------------------------------------------
+
+8. What is Re-ranking?
+
+Improving retrieved document order.
+
+===========================================================
+END OF RAG NOTES
+===========================================================
